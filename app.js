@@ -9,10 +9,14 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.set('view engine', 'ejs');
-app.set(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+io.on("connection", (socket)=>{
+    console.log('connected')
+})
 
 app.get('/', (req, res)=>{
-    res.send('hey')
+    res.render('index')
 });
 
 server.listen(3000)
